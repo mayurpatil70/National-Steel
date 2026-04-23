@@ -1,3 +1,11 @@
+// Redirect to home section on page refresh
+window.addEventListener("load", function () {
+  // Check if page was reloaded (not from history navigation)
+  if (performance.navigation.type === 1) {
+    window.location.hash = "#home";
+  }
+});
+
 // Navbar scroll effect
 const navbar = document.getElementById("navbar");
 window.addEventListener("scroll", () => {
