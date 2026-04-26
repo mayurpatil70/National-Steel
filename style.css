@@ -448,6 +448,15 @@ section {
   border-radius: 4px;
   display: block;
 }
+
+@media (max-width: 768px) {
+  .about-img-main,
+  .about-img-main-placeholder {
+    /* grid-template-columns: 1fr; */
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+}
 .about-img-main-placeholder {
   width: 100%;
   height: 500px;
