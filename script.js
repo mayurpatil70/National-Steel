@@ -1,9 +1,8 @@
 // Redirect to home section on page refresh
 window.addEventListener("load", function () {
-  // Check if page was reloaded (not from history navigation)
-  if (performance.navigation.type === 1) {
-    window.location.hash = "#home";
-  }
+  // Always redirect to home on page load/refresh
+  window.location.hash = "#home";
+  window.scrollTo({ top: 0, behavior: "instant" });
 });
 
 // Navbar scroll effect
@@ -78,22 +77,4 @@ document.querySelectorAll(".mobile-menu a").forEach((a) => {
   a.addEventListener("click", () => {
     document.getElementById("mobileMenu").classList.remove("open");
   });
-});
-
-// Home redirect on refresh/direct section navigation
-document.addEventListener("DOMContentLoaded", function () {
-  const hash = window.location.hash;
-  if (hash && hash !== "#home") {
-    // Scroll to home first (immediate)
-    window.scrollTo({ top: 0, behavior: "instant" });
-    // Then to target after delay (show home briefly)
-    setTimeout(() => {
-      if (hash) {
-        const target = document.querySelector(hash);
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    }, 600);
-  }
 });
