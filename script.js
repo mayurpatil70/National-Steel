@@ -1,25 +1,39 @@
-// Redirect to home section on page refresh
-document.addEventListener("DOMContentLoaded", function () {
-  // Set hash to home
-  window.location.hash = "#home";
+// Redirect to home section on page refresh - PREVENT BACK TO PREVIOUS SECTION
+(function () {
+  // Use sessionStorage to detect if this is a page refresh
+  const isRefresh = sessionStorage.getItem("pageRefreshed");
 
-  // Scroll to the home element
-  const homeElement = document.getElementById("home");
-  if (homeElement) {
-    homeElement.scrollIntoView({ behavior: "instant", block: "start" });
-  } else {
-    window.scrollTo({ top: 0, behavior: "instant" });
+  if (!isRefresh) {
+    // First load - mark as refreshed
+    sessionStorage.setItem("pageRefreshed", "true");
   }
-});
 
-window.addEventListener("load", function () {
-  // Secondary check on full load
-  const homeElement = document.getElementById("home");
-  if (homeElement && window.location.hash !== "#home") {
-    window.location.hash = "#home";
-    homeElement.scrollIntoView({ behavior: "instant", block: "start" });
+  // Always redirect to home on any page load/refresh
+  function forceHomeRedirect() {
+    window.history.replaceState(null, null, window.location.pathname + "#home");
+
+    const homeElement = document.getElementById("home");
+    if (homeElement) {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      homeElement.scrollIntoView({ behavior: "instant", block: "start" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
   }
-});
+
+  // Run on DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", forceHomeRedirect);
+
+  // Run on window load as backup
+  window.addEventListener("load", forceHomeRedirect);
+
+  // Prevent hash changes that try to navigate away from home on refresh
+  window.addEventListener("hashchange", function (e) {
+    if (isRefresh && window.location.hash !== "#home") {
+      window.location.hash = "#home";
+    }
+  });
+})();
 
 // Navbar scroll effect
 const navbar = document.getElementById("navbar");
