@@ -1,16 +1,23 @@
 // Redirect to home section on page refresh
 document.addEventListener("DOMContentLoaded", function () {
-  // Clear any hash and redirect to home on page load
-  window.history.replaceState(null, null, window.location.pathname);
+  // Set hash to home
   window.location.hash = "#home";
-  window.scrollTo({ top: 0, behavior: "instant" });
+
+  // Scroll to the home element
+  const homeElement = document.getElementById("home");
+  if (homeElement) {
+    homeElement.scrollIntoView({ behavior: "instant", block: "start" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
 });
 
 window.addEventListener("load", function () {
-  // Ensure redirect on full load as well
-  if (window.location.hash !== "#home") {
+  // Secondary check on full load
+  const homeElement = document.getElementById("home");
+  if (homeElement && window.location.hash !== "#home") {
     window.location.hash = "#home";
-    window.scrollTo({ top: 0, behavior: "instant" });
+    homeElement.scrollIntoView({ behavior: "instant", block: "start" });
   }
 });
 
