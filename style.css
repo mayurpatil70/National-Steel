@@ -1158,12 +1158,36 @@ section {
   width: 100%;
   height: 400px;
   overflow: hidden;
+  position: relative;
 }
 .map-iframe {
   display: block;
   width: 100%;
   height: 100%;
   border: none;
+}
+.map-redirect-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 10;
+  font-size: 14px;
+}
+.map-redirect-btn:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 footer {
   background: #0e1820;
