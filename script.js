@@ -1,39 +1,37 @@
-// Redirect to home section on page refresh - PREVENT BACK TO PREVIOUS SECTION
-(function () {
-  // Use sessionStorage to detect if this is a page refresh
-  const isRefresh = sessionStorage.getItem("pageRefreshed");
+// Disable automatic scroll restoration - CRITICAL for redirect
+history.scrollRestoration = "manual";
 
-  if (!isRefresh) {
-    // First load - mark as refreshed
-    sessionStorage.setItem("pageRefreshed", "true");
-  }
+// Redirect to home section on page refresh
+window.addEventListener("beforeunload", function () {
+  // Clear any stored scroll position
+  sessionStorage.removeItem("scrollPos");
+});
 
-  // Always redirect to home on any page load/refresh
-  function forceHomeRedirect() {
-    window.history.replaceState(null, null, window.location.pathname + "#home");
+document.addEventListener("DOMContentLoaded", function () {
+  // Force scroll to top FIRST
+  window.scrollTo(0, 0);
 
+  // Clear the hash completely and set to #home
+  window.location.hash = "";
+  window.location.hash = "home";
+
+  // Scroll to home element
+  setTimeout(function () {
     const homeElement = document.getElementById("home");
     if (homeElement) {
-      window.scrollTo({ top: 0, behavior: "instant" });
-      homeElement.scrollIntoView({ behavior: "instant", block: "start" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "instant" });
+      homeElement.scrollIntoView({ behavior: "instant" });
     }
+    window.scrollTo(0, 0);
+  }, 10);
+});
+
+// Backup: on load event
+window.addEventListener("load", function () {
+  window.scrollTo(0, 0);
+  if (window.location.hash.toLowerCase() !== "#home") {
+    window.location.hash = "home";
   }
-
-  // Run on DOMContentLoaded
-  document.addEventListener("DOMContentLoaded", forceHomeRedirect);
-
-  // Run on window load as backup
-  window.addEventListener("load", forceHomeRedirect);
-
-  // Prevent hash changes that try to navigate away from home on refresh
-  window.addEventListener("hashchange", function (e) {
-    if (isRefresh && window.location.hash !== "#home") {
-      window.location.hash = "#home";
-    }
-  });
-})();
+});
 
 // Navbar scroll effect
 const navbar = document.getElementById("navbar");
