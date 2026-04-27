@@ -1,8 +1,17 @@
 // Redirect to home section on page refresh
-window.addEventListener("load", function () {
-  // Always redirect to home on page load/refresh
+document.addEventListener("DOMContentLoaded", function () {
+  // Clear any hash and redirect to home on page load
+  window.history.replaceState(null, null, window.location.pathname);
   window.location.hash = "#home";
   window.scrollTo({ top: 0, behavior: "instant" });
+});
+
+window.addEventListener("load", function () {
+  // Ensure redirect on full load as well
+  if (window.location.hash !== "#home") {
+    window.location.hash = "#home";
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
 });
 
 // Navbar scroll effect
