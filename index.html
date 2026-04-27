@@ -551,13 +551,14 @@
 
     <!-- FULL WIDTH GOOGLE MAP -->
     <section id="map-section">
-        <div class="map-container">
-            <iframe class="map-iframe" src="https://maps.app.goo.gl/Wcjk6qgCYLTdshpJ8" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade" title="National Steel Location Map">
-            </iframe>
-            <a href="https://maps.app.goo.gl/Wcjk6qgCYLTdshpJ8" target="_blank" class="map-redirect-btn">
-                <i class="fas fa-map-marker-alt"></i> Open Full Map
-            </a>
+        <div class="map-container" onclick="openGoogleMaps()" style="cursor: pointer;">
+            <iframe class="map-iframe"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3722.134916147283!2d74.96940931533718!3d21.04294438861486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd916e29e5555ab%3A0x91b8c4d8f6f6f6f6!2sNational%20Steel%2C%20Amalner!5e0!3m2!1sen!2sin!4v1680000000000"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                title="National Steel Location Map" style="pointer-events: none;"></iframe>
+            <div class="map-overlay-info">
+                <i class="fas fa-mouse"></i> Click to view on Google Maps
+            </div>
         </div>
     </section>
 

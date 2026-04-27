@@ -106,3 +106,8 @@ document.querySelectorAll(".mobile-menu a").forEach((a) => {
     document.getElementById("mobileMenu").classList.remove("open");
   });
 });
+
+// Open Google Maps location when map is clicked
+function openGoogleMaps() {
+  window.open("https://maps.app.goo.gl/Wcjk6qgCYLTdshpJ8", "_blank");
+}
